@@ -1,60 +1,100 @@
-<!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1" name="viewport">
-    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" rel="stylesheet">
-
-    <title>Registration</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Page Accueil</title>
+    <link rel="icon" type="image/x-icon" th:href="@{assets/img/favicon.ico}" />
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
 </head>
 <body>
-<div class="container">
-    <div class="row mt-5">
-        <div class="col-6 mx-auto">
-            <form
-                    method="post"
-                    role="form"
-                    th:action="@{/registration_prof}"
-                    th:object="${prof}"
-            >
-                <h1>Registration Form professeur</h1>
-                <div th:if="${param.success}">
-                    <div class="alert alert-info">
-                        Registration successful !!!
+<header>
+    <h1 class="site-heading text-center text-faded d-none d-lg-block">
+        <span class="site-heading-upper text-primary mb-3">Gestion d'ecole</span>
+        <span class="site-heading-lower">Apprendre, grandir, réussir ensemble</span>
+    </h1>
+</header>
+
+
+<section class="page-section cta">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-9 mx-auto">
+                <div class="cta-inner bg-faded text-center rounded">
+
+                    <div class="row mt-5">
+                        <div class="col-6 mx-auto">
+                            <form
+                                    method="post"
+                                    role="form"
+                                    th:action="@{/registration_prof}"
+                                    th:object="${prof}"
+                            >
+                                <h2>Formulaire d'inscription pour le professeur</h2>
+                                <div th:if="${param.success}">
+                                    <div class="alert alert-info">
+                                        Registration successful !!!
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" for="name">Nom</label>
+                                    <input class="form-control" id="name" name="name" type="text">
+
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" for="email">E-mail</label>
+                                    <input class="form-control" id="email" name="email" type="email">
+
+                                </div>
+                                <div class="mb-3">
+                                    <label class="col-sm-2 col-form-label" for="password" style="white-space: nowrap;">Mot de passe</label>
+                                    <input class="form-control" id="password" name="password" type="password">
+
+                                </div>
+                                <div class="mb-3">
+                                    <button class="btn btn-primary mb-3" type="submit">Inscription</button>
+                                    or <a class="link-primary" th:href="@{/login}">Connecter</a>
+                                </div>
+                            </form>
+                        </div>
                     </div>
+
+
+                    <script crossorigin="anonymous"
+                            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+                            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
                 </div>
-                <div class="mb-3">
-                    <label class="form-label" for="name">Name</label>
-                    <input class="form-control" id="name" name="name" type="text">
-                    <p class="text-danger" th:errors="*{name}"
-                       th:if="${#fields.hasErrors('name')}"></p>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label" for="email">Email</label>
-                    <input class="form-control" id="email" name="email" type="email">
-                    <p class="text-danger" th:errors="*{email}"
-                       th:if="${#fields.hasErrors('email')}"></p>
-                </div>
-                <div class="mb-3">
-                    <label class="col-sm-2 col-form-label" for="password">Password</label>
-                    <input class="form-control" id="password" name="password" type="password">
-                    <p class="text-danger" th:errors="*{password}"
-                       th:if="${#fields.hasErrors('password')}"></p>
-                </div>
-                <div class="mb-3">
-                    <button class="btn btn-primary mb-3" type="submit">Register</button>
-                    or <a class="link-primary" th:href="@{/login}">Login</a>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
-</div>
+</section>
+<!-- Service Start -->
 
 
-<script crossorigin="anonymous"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
+
+
+<!-- Service End -->
+
+<footer class="footer text-faded text-center py-5">
+    <div class="container"><p class="m-0 small">Copyright &copy; Your Website 2023</p></div>
+</footer>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script th:src="@{/assets/js/scripts.js}" ></script>
 </body>
 </html>
+

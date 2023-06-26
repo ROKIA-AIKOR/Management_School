@@ -41,30 +41,30 @@
                                     th:action="@{/registration_admin}"
                                     th:object="${admin}"
                             >
-                                <h2>Formulaire d'inscription pour l'administrateur</h2>
+                                <h1>Registration Form Admin</h1>
                                 <div th:if="${param.success}">
                                     <div class="alert alert-info">
                                         Registration successful !!!
                                     </div>
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label" for="name">Nom</label>
+                                    <label class="form-label" for="name">Name</label>
                                     <input class="form-control" id="name" name="name" type="text">
 
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label" for="email">E-mail</label>
+                                    <label class="form-label" for="email">Email</label>
                                     <input class="form-control" id="email" name="email" type="email">
 
                                 </div>
                                 <div class="mb-3">
-                                    <label class="col-sm-2 col-form-label" for="password" style="white-space: nowrap;">Mot de passe</label>
+                                    <label class="col-sm-2 col-form-label" for="password">Password</label>
                                     <input class="form-control" id="password" name="password" type="password">
 
                                 </div>
                                 <div class="mb-3">
-                                    <button class="btn btn-primary mb-3" type="submit">Inscription</button>
-                                    or <a class="link-primary" th:href="@{/login}">Connecter</a>
+                                    <button class="btn btn-primary mb-3" type="submit">Register</button>
+                                    or <a class="link-primary" th:href="@{/login}">Login</a>
                                 </div>
                             </form>
                         </div>
@@ -97,5 +97,3 @@
 <script th:src="@{/assets/js/scripts.js}" ></script>
 </body>
 </html>
-
-

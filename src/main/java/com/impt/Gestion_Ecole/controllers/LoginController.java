@@ -18,6 +18,11 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
+    @RequestMapping("/user")
+    public String userpage() {
+        return "user";
+    }
+
 
     @RequestMapping("/login")
     public String loginForm() {
@@ -42,7 +47,7 @@ public class LoginController {
 
         if (existingUser != null)
             result.rejectValue("email", null,
-                    "User already registered !!!");
+                    "Utilisateur déjà enregistré!!!");
 
         if (result.hasErrors()) {
             model.addAttribute("etudiante", etudiantes);
@@ -72,7 +77,7 @@ public class LoginController {
 
         if (existingUser != null)
             result.rejectValue("email", null,
-                    "User already registered !!!");
+                    "Utilisateur déjà enregistré!!!");
 
         if (result.hasErrors()) {
             model.addAttribute("prof", profs);
@@ -100,7 +105,7 @@ public class LoginController {
 
         if (existingUser != null)
             result.rejectValue("email", null,
-                    "User already registered !!!");
+                    "Utilisateur déjà enregistré!!!");
 
         if (result.hasErrors()) {
             model.addAttribute("admin", admins);

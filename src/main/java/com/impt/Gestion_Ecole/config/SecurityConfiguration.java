@@ -43,6 +43,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/assets/**",
                         "/img/**").permitAll()
                 .antMatchers("/**").permitAll()
+                .antMatchers("/test/**").permitAll()
                 .antMatchers("/index/**").permitAll()
                 .antMatchers("/registration_admin/**").permitAll()
                 .antMatchers("/registration_prof/**").permitAll()
@@ -55,7 +56,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/login")
-                .defaultSuccessUrl("/user/")
+                .defaultSuccessUrl("/user")
                 .permitAll()
                 .and()
                 .logout()
