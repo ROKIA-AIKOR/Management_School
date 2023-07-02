@@ -1,4 +1,4 @@
-package com.impt.Gestion_Ecole.services;
+package com.impt.Gestion_Ecole.services.ImpService;
 
 
 import com.impt.Gestion_Ecole.model.Role;
@@ -6,6 +6,7 @@ import com.impt.Gestion_Ecole.model.TbConstants;
 import com.impt.Gestion_Ecole.model.User;
 import com.impt.Gestion_Ecole.repositories.RoleRepository;
 import com.impt.Gestion_Ecole.repositories.UserRepository;
+import com.impt.Gestion_Ecole.services.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,10 @@ public class UserServiceImpl implements UserService {
     private PasswordEncoder passwordEncoder;
 
 
+    public User createUser(User user) {
+        return userRepository.save(user);
+    }
+
     @Override
     public void saveProf(User profs) {
         Role role = roleRepository.findByName(TbConstants.Roles.PROFESSEUR);
@@ -34,6 +39,7 @@ public class UserServiceImpl implements UserService {
 
 
         User user = new User(
+                profs.getUsername(),
                 profs.getEmail(),
                 passwordEncoder.encode(profs.getPassword()),
                 Arrays.asList(role));
@@ -49,7 +55,7 @@ public class UserServiceImpl implements UserService {
 
 
         User admin = new User(
-
+                admins.getUsername(),
                 admins.getEmail(),
                 passwordEncoder.encode(admins.getPassword()),
                 Arrays.asList(role));
@@ -65,7 +71,7 @@ public class UserServiceImpl implements UserService {
 
 
         User admin = new User(
-
+                etudiantes.getUsername(),
                 etudiantes.getEmail(),
                 passwordEncoder.encode(etudiantes.getPassword()),
                 Arrays.asList(role));

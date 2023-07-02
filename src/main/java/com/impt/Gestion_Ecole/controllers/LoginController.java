@@ -1,6 +1,6 @@
 package com.impt.Gestion_Ecole.controllers;
 
-import com.impt.Gestion_Ecole.services.UserService;
+import com.impt.Gestion_Ecole.services.services.UserService;
 import com.impt.Gestion_Ecole.model.User;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -38,33 +38,38 @@
                             <form
                                     method="post"
                                     role="form"
-                                    th:action="@{/registration_etudiante}"
-                                    th:object="${etudiante}"
+                                    th:action="@{/add_prof}"
+                                    th:object="${professeur}"
                             >
-                                <h2>Formulaire d'inscription pour l'etudiante</h2>
+                                <h2>Formulaire d'inscription pour l'administrateur</h2>
                                 <div th:if="${param.success}">
                                     <div class="alert alert-info">
-                                        Registration successful !!!
+                                        inscription réussi !!!
                                     </div>
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label" for="username">Username</label>
-                                    <input class="form-control" id="username" name="username" type="Entrez votre username">
-
+                                    <label class="form-label" for="name">Nom</label>
+                                    <input class="form-control" id="name" name="name" type="text" placeholder="Entrez votre nom" th:field="*{name}">
                                 </div>
-                                <div class="mb-3">
-                                    <label class="form-label" for="email">E-mail</label>
-                                    <input class="form-control" id="email" name="email" type="email">
 
-                                </div>
                                 <div class="mb-3">
-                                    <label class="col-sm-2 col-form-label" for="password" style="white-space: nowrap;">Mot de passe</label>
-                                    <input class="form-control" id="password" name="password" type="password">
+                                    <label class="form-label" for="prenom">Prénom</label>
+                                    <input class="form-control" id="prenom" name="prenom" type="text" placeholder="Entrez votre prénom" th:field="*{prenom}">
+                                </div>
 
-                                </div>
                                 <div class="mb-3">
-                                    <button class="btn btn-primary mb-3" type="submit">Inscription</button>
-                                    or <a class="link-primary" th:href="@{/login}">Connecter</a>
+                                    <label class="form-label" for="specialite">Spécialité</label>
+                                    <input class="form-control" id="specialite" name="specialite" type="text" placeholder="Entrez votre spécialité" th:field="*{specialite}">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label" for="diplome">Diplôme</label>
+                                    <input class="form-control" id="diplome" name="diplome" type="text" placeholder="Entrez votre diplôme" th:field="*{diplome}">
+                                </div>
+
+                                <div class="mb-3">
+                                    <button class="btn btn-primary mb-3" type="submit">Enregistrer</button>
+
                                 </div>
                             </form>
                         </div>
@@ -97,4 +102,5 @@
 <script th:src="@{/assets/js/scripts.js}" ></script>
 </body>
 </html>
+
 
