@@ -28,6 +28,9 @@ public class ProfesseurController {
         this.passwordEncoder = passwordEncoder;
     }
 
+
+
+
     /*******************************
      *
      * Affiche la liste de professeur
@@ -40,6 +43,8 @@ public class ProfesseurController {
         model.addAttribute("professeurs", professeurs);
         return "professeur/professeur-list";
     }
+
+
 
 
     /*******************************
@@ -87,6 +92,7 @@ public class ProfesseurController {
                                 @RequestParam("username") String username,
                                 @RequestParam("email") String email,
                                 @RequestParam("password") String password) {
+
         User user = new User(username, email, passwordEncoder.encode(password),
                 new ArrayList<>(Arrays.asList(new Role("ROLE_PROFESSEUR"))));
         professeurService.createProfesseur(professeur, user);

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" rel="stylesheet">
+
+
+</head>
+
+
+    <!-- Sidebar -->
+    <nav id="sidebarMenu" class="home-nav" th:fragment="navbar">
+        <div class="position-sticky">
+
+                <!-- Collapsed content -->
+                <ul id="collapseExample1" class="collapse show list-group list-group-flush">
+                    <li class="list-group-item py-1">
+                        <a th:href="@{/home}">Home</a>
+                    </li>
+                    <li class="list-group-item py-1">
+                        <a th:href="@{/}" class="text-reset">index</a>
+
+                    </li>
+                    <li class="list-group-item py-1">
+                        <a href="" class="text-reset">Professeurs</a>
+                    </li>
+                    <li class="list-group-item py-1">
+                        <a href="" class="text-reset">Etudiants</a>
+                    </li>
+                </ul>
+
+        </div>
+
+
+
+
+    </nav>
+    <!-- Sidebar -->
+
+
+</html>

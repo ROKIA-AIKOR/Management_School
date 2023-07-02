@@ -16,35 +16,44 @@ import java.util.Arrays;
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
     private UserRepository userRepository;
 
-    @Autowired
     private RoleRepository roleRepository;
 
-    @Autowired
     private PasswordEncoder passwordEncoder;
 
+    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     public User createUser(User user) {
         return userRepository.save(user);
     }
+    public User updateUser(User user){
+        // Vérifier si l'utilisateur existe
+        User existingUser = userRepository.findById(user.getUser_id()).orElse(null);
+        if (existingUser == null) {
+            return null; // Ou lancez une exception appropriée si nécessaire
+        }
 
-    @Override
-    public void saveProf(User profs) {
-        Role role = roleRepository.findByName(TbConstants.Roles.PROFESSEUR);
+        // Mettre à jour les propriétés de l'utilisateur
+        existingUser.setUsername(user.getUsername());
+        existingUser.setEmail(user.getEmail());
 
-        if (role == null)
-            role = roleRepository.save(new Role(TbConstants.Roles.PROFESSEUR));
-
-
-        User user = new User(
-                profs.getUsername(),
-                profs.getEmail(),
-                passwordEncoder.encode(profs.getPassword()),
-                Arrays.asList(role));
-        userRepository.save(user);
+        // Vérifier si le mot de passe a été modifié
+        if (!user.getPassword().isEmpty()) {
+            // Encoder le nouveau mot de passe
+            String encodedPassword = passwordEncoder.encode(user.getPassword());
+            // Mettre à jour le mot de passe de l'utilisateur
+            existingUser.setPassword(encodedPassword);
+        }
+        // Enregistrer les modifications dans la base de données
+        return userRepository.save(existingUser);
     }
+
+
 
     @Override
     public void saveAdmin(User admins) {

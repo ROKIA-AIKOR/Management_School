@@ -59,35 +59,7 @@ public class LoginController {
 
     }
 
-    //Ajouter professeur
-    @GetMapping("/registration_prof")
-    public String registrationFormProf(Model model) {
-        User prof = new User();
-        model.addAttribute("prof", prof);
-        return "registration_prof";
-        // return "redirect:/";
-    }
 
-    @PostMapping("/registration_prof")
-    public String registrationProf(
-            @Valid @ModelAttribute("prof") User profs,
-            BindingResult result,
-            Model model) {
-        User existingUser = userService.findUserByEmail(profs.getEmail());
-
-        if (existingUser != null)
-            result.rejectValue("email", null,
-                    "Utilisateur déjà enregistré!!!");
-
-        if (result.hasErrors()) {
-            model.addAttribute("prof", profs);
-            return "/registration_prof";
-        }
-
-        userService.saveProf(profs);
-        return "redirect:/registration_prof?success";
-
-    }
     //Ajouter  Admin
     @GetMapping("/registration_admin")
     public String registrationFormAdmin(Model model) {

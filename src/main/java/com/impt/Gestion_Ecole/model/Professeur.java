@@ -3,6 +3,7 @@ package com.impt.Gestion_Ecole.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Date;
 
 
 @Entity
@@ -24,12 +25,7 @@ public class Professeur {
 
     private String specialite;
     private String diplome;
-/*
-    @OneToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
-    private User user;
 
- */
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;

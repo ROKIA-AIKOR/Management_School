@@ -1,27 +1,32 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<!-- main-fragment (title, otherStaticResources, header, nav, mainContent, footer) -->
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layouts/main-layout :: main-fragment(
+                                                ~{::title},
+                                                ~{:: #home-static-resources},
+                                                ~{:: #home-header},
+                                                ~{:: #home-nav},
+                                                ~{:: #home-main-content},
+                                                ~{:: #home-footer}
+                                               )}">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>Page Accueil</title>
+    <title>Title of Home Page</title>
+
+    <th:block id="home-static-resources">
+        <script type="text/javascript" src="../static/home.js" th:src="@{/home.js}"></script>
+        <link rel="stylesheet" type="text/css" href="../static/home.css" th:href="@{/home.css}"/>
+    </th:block>
+
     <link rel="icon" type="image/x-icon" th:href="@{assets/img/favicon.ico}" />
-    <!-- Google fonts-->
+    <!-- Google fonts -->
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet" />
-    <!-- Core theme CSS (includes Bootstrap)-->
+    <!-- Core theme CSS (includes Bootstrap) -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
     <!-- MDB -->
-    <script
-            type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"
-    ></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -29,108 +34,99 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-<header>
-    <h1 class="site-heading text-center text-faded d-none d-lg-block">
-        <span class="site-heading-upper text-primary mb-3">Ajouter un professeur</span>
-    </h1>
-</header>
 
+<div id="home-header" th:replace="~{/fragments/navtop :: navtop}">
+    Header of Home Page
+</div>
 
-<section class="page-section cta">
-    <div class="container">
-        <div class="row">
-            <h1> List professeurs </h1>
-        </div>
+<div id="home-nav" th:replace="~{/fragments/navbar :: navbar}">
+    Home Navbar
+</div>
 
-        <div class="row">
-            <div class col-lg-3>
-                <a th:href = "@{/professeur-form}" class="btn btn-primary"> Ajouter Professeurs </a>
+<div id="home-main-content" class="page-section cta">
+    <section class="page-section cta">
+        <div class="container">
+            <div class="row">
+                <h1>Liste des professeurs</h1>
             </div>
 
-        </div>
-        <br>
-        <table class="table table-stripped table-bordered">
-            <thead class="table-dark">
-            <tr>
-                <th>  Nom </th>
-                <th> Prenom </th>
-                <th>  Diplome</th>
-                <th> Specialite </th>
-                <th>  E-mail</th>
-                <th>  Nom d'utilisateur</th>
-                <th> Actions </th>
-            </tr>
-            </thead>
+            <div class="row">
+                <div class="col-lg-3">
+                    <a th:href="@{/professeur-form}" class="btn btn-primary">Ajouter Professeur</a>
+                </div>
+            </div>
+            <br>
 
-            <tbody>
-            <tr th:each = "professeur: ${professeurs}">
-                <td>
-                    <a th:href="@{/detail-professeurs/{id}(id=${professeur.prof_id})}">
-                        <span th:text="${professeur.name}"></span>
-                    </a>
-                </td>
-                <td th:text = "${professeur.prenom}"></td>
-                <td th:text = "${professeur.diplome}"></td>
-                <td th:text = "${professeur.specialite}"></td>
-                <td th:text="${professeur.user.email}"></td>
-                <td th:text="${professeur.user.username}"></td>
-                <td>
+            <table class="table table-stripped table-bordered">
+                <thead class="table-dark">
+                <tr>
+                    <th>Id</th>
+                    <th>Nom</th>
+                    <th>Prenom</th>
+                    <th>Diplome</th>
+                    <th>Specialite</th>
+                    <th>E-mail</th>
+                    <th>Nom d'utilisateur</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
 
-                    <a th:href="@{/professeurs/edit/{id}(id=${professeur.prof_id})}"
-                       class="btn btn-info"> <i class='fa fa-edit'></i></a>
+                <tbody>
+                <tr th:each="professeur : ${professeurs}">
+                    <td th:text="${professeur.prof_id}"></td>
+                    <td>
+                        <a th:href="@{/detail-professeurs/{id}(id=${professeur.prof_id})}">
+                            <span th:text="${professeur.name}"></span>
+                        </a>
+                    </td>
+                    <td th:text="${professeur.prenom}"></td>
+                    <td th:text="${professeur.diplome}"></td>
+                    <td th:text="${professeur.specialite}"></td>
+                    <td th:text="${professeur.user.email}"></td>
+                    <td th:text="${professeur.user.username}"></td>
+                    <td>
+                        <a th:href="@{/professeurs/edit/{id}(id=${professeur.prof_id})}" class="btn btn-info">
+                            <i class="fa fa-edit"></i>
+                        </a>
 
+                        <button class="btn btn-danger" data-mdb-toggle="modal" th:data-mdb-target="'#exampleModal' + ${professeur.prof_id}">
+                            <i class="fa fa-trash"></i>
+                        </button>
 
-                    <!-- Button supprission popup  modal -->
+                        <!-- Modal -->
+                        <div class="modal fade" th:id="'exampleModal' + ${professeur.prof_id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
-                    <button   class="btn btn-danger" data-mdb-toggle="modal" data-mdb-target="#exampleModal"><i class="fa fa-trash"></i></button>
-                    <!-- Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Confirmation de suppression</h5>
-                                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">Êtes-vous sûr de vouloir supprimer ce professeur ?</div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Annuler</button>
-                                    <a th:href="@{/professeurs/{id}(id=${professeur.prof_id})}"
-                                       class="btn btn-danger">Supprimer</a>
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Confirmation de suppression</h5>
+                                        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Êtes-vous sûr de vouloir supprimer le professeur <span th:text="${professeur.prof_id}"></span> ?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Annuler</button>
+                                        <a th:href="@{/professeurs/{id}(id=${professeur.prof_id})}" class="btn btn-danger">Supprimer</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </td>
-            </tr>
-            </tbody>
-
-        </table>
-        <div class="pagination">
-            <ul>
-                <li th:classappend="${professeurPage.first ? 'disabled' : ''}">
-                    <a th:href="@{/pagination-professeurs?page=0}">First</a>
-                </li>
-                <li th:classappend="${professeurPage.previous ? '' : 'disabled'}">
-                    <a th:href="@{/pagination-professeurs?page=${professeurPage.number - 1}}">Previous</a>
-                </li>
-                <li th:each="page : ${professeurPage.getNumberList()}">
-                    <a th:href="@{/pagination-professeurs?page=${page}}">[[${page}]]</a>
-                </li>
-                <li th:classappend="${professeurPage.next ? '' : 'disabled'}">
-                    <a th:href="@{/pagination-professeurs?page=${professeurPage.number + 1}}">Next</a>
-                </li>
-                <li th:classappend="${professeurPage.last ? 'disabled' : ''}">
-                    <a th:href="@{/pagination-professeurs?page=${professeurPage.totalPages - 1}}">Last</a>
-                </li>
-            </ul>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
-    </div>
-</section>
-
+    </section>
+</div>
 
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
-<script th:src="@{/assets/js/scripts.js}" ></script>
+<script th:src="@{/assets/js/scripts.js}"></script>
+
+<div id="home-footer" th:replace="~{/fragments/footer :: footer}">
+    Footer
+</div>
 </body>
 </html>
