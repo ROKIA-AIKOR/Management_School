@@ -1,17 +1,21 @@
 package com.impt.Gestion_Ecole.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 @Entity
 @Table(name="users")
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
@@ -38,6 +42,7 @@ public class User {
     private Professeur professeur;
      */
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private Professeur professeur;
 
 
@@ -52,5 +57,17 @@ public class User {
         this.username = username;
         this.email = email;
         this.password = password;
+    }
+
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + user_id +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+
+                ", roles=" + roles.stream().map(Role::getName).collect(Collectors.toList()) +
+                '}';
     }
 }

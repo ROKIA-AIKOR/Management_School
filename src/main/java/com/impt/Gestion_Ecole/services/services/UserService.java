@@ -6,6 +6,13 @@ public interface UserService {
 
     public User createUser(User user);
     public User updateUser(User user);
+
+
+
+
+
+
+
     void saveAdmin(User admins);
     void saveEtudiante(User etudiantes);
     User findUserByEmail(String email);

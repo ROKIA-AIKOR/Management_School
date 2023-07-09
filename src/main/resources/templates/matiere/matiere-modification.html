@@ -57,48 +57,46 @@
         <div class="row">
             <div class="col-xl-9 mx-auto">
                 <div class="cta-inner bg-faded text-center rounded">
-                    <a th:href="@{/matiere-list}">Retour à la liste des professeurs</a>
+                    <a th:href = "@{/matiere-list}" class="previous">&laquo; La list des matières</a>
 
+                    <form method="post" th:action="@{/matieres/edit/{id}(id=${matiere.matiereId})}" th:object="${matiere}">
 
-                    <div class="col-12 mx-auto">
+                                    <input type="hidden" th:field="*{matiereId}" />
+                                    <div>
+                                        <label>Nom de matiere:</label>
+                                        <input type="text" th:field="*{nom}" required />
+                                    </div>
+                                    <div>
+                                        <label>Description :</label>
+                                        <textarea th:field="*{description}" required></textarea>
+                                    </div>
+                                    <div>
+                                        <label>Professeur :</label>
+                                        <select th:field="*{professeur.prof_id}" required>
+                                            <option th:each="professeur : ${professeurs}"
+                                                    th:value="${professeur.prof_id}"
+                                                    th:text="${professeur.name + ' ' + professeur.prenom}"></option>
+                                        </select>
+                                    </div>
+                                    <input type="hidden" name="professeurId" th:value="${matiere.professeur.prof_id}" />
 
-                                <br>
-                                <div th:if="${param.error}">
-                                    <div class="alert alert-danger">Adresse e-mail ou mot de passe invalide !!!</div>
-                                </div>
-                                <div th:if="${param.logout}">
-                                    <div class="alert alert-success">Vous avez été déconnecté(e) !!!</div>
-                                </div>
+                                    <div class="d-flex justify-content-center">
+                                        <a type="submit" class="btn btn-primary"> Modifier </a>
+                                    </div>
+                                </form>
 
-                                <p>Nom: <span th:text="${professeur.name}"></span></p>
-                                <p>Prénom: <span th:text="${professeur.prenom}"></span></p>
-                                <p>Diplome: <span th:text="${professeur.diplome}"></span></p>
-                                <p>Specialité: <span th:text="${professeur.specialite}"></span></p>
-                                <p>E-mail: <span  th:text="${professeur.user.email}"></span></p>
-                                <p> Nom d'utilisateur:  <span  th:text="${professeur.user.username}"></span></p>
-
-
-                            </div>
-
-
-
-
-
-
-
-
-                        </div>
-                    </div>
                 </div>
             </div>
-            </section>
+        </div>
+    </div>
+</section>
 
-            <footer class="footer text-faded text-center py-5">
-                <div class="container"><p class="m-0 small">Copyright &copy; Your Website 2023</p></div>
-            </footer>
-            <!-- Bootstrap core JS-->
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-            <!-- Core theme JS-->
-            <script th:src="@{/assets/js/scripts.js}" ></script>
+<footer class="footer text-faded text-center py-5">
+    <div class="container"><p class="m-0 small">Copyright &copy; Your Website 2023</p></div>
+</footer>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script th:src="@{/assets/js/scripts.js}" ></script>
 </body>
 </html>

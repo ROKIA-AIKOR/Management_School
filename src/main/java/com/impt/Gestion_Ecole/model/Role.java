@@ -1,8 +1,7 @@
 package com.impt.Gestion_Ecole.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -10,7 +9,8 @@ import java.util.List;
 
 @Entity
 @Table(name="role")
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Role {
@@ -22,6 +22,7 @@ public class Role {
     private String name;
 
     @ManyToMany(mappedBy = "roles")
+
     //private Set<User> users= new HashSet<>();
     private List<User> users = new ArrayList<>();
 
@@ -32,5 +33,14 @@ public class Role {
 
     public Role(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Role{" +
+                "role_id=" + role_id +
+                ", name='" + name + '\'' +
+                ", users=" + users +
+                '}';
     }
 }

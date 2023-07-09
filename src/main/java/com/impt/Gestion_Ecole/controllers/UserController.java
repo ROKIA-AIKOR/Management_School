@@ -22,6 +22,10 @@ public class UserController {
     public String home() {
         return "index";
     }
+    @GetMapping("/home")
+    public String homeOne() {
+        return "home";
+    }
     @PostMapping
     public User createUser(@RequestBody User user) {
         return userService.createUser(user);

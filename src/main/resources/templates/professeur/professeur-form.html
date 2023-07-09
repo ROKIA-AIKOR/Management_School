@@ -1,39 +1,60 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<!-- main-fragment (title, otherStaticResources, header, nav, mainContent, footer) -->
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layouts/main-layout :: main-fragment(
+                                                ~{::title},
+                                                ~{:: #home-static-resources},
+                                                ~{:: #home-header},
+                                                ~{:: #home-nav},
+                                                ~{:: #home-main-content},
+                                                ~{:: #home-footer}
+                                               )}">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>Page Accueil</title>
+    <title>Title of Home Page</title>
+
+    <th:block id="home-static-resources">
+        <script type="text/javascript" src="../static/home.js" th:src="@{/home.js}"></script>
+        <link rel="stylesheet" type="text/css" href="../static/home.css" th:href="@{/home.css}"/>
+    </th:block>
+
     <link rel="icon" type="image/x-icon" th:href="@{assets/img/favicon.ico}" />
-    <!-- Google fonts-->
+    <!-- Google fonts -->
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet" />
-    <!-- Core theme CSS (includes Bootstrap)-->
+    <!-- Core theme CSS (includes Bootstrap) -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+    <!-- MDB -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Add icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body>
 <header>
     <h1 class="site-heading text-center text-faded d-none d-lg-block">
-        <span class="site-heading-upper text-primary mb-3">Ajouter un professeur</span>
+        <span class="site-heading-upper text-primary mb-3">Gestion d'ecole</span>
+        <span class="site-heading-lower">Apprendre, grandir, réussir ensemble</span>
     </h1>
 </header>
+<body>
 
 
-<section class="page-section cta">
+
+<div id="home-nav" th:replace="~{/fragments/navbar :: navbar}">
+    Home Navbar
+</div>
+
+<div id="home-main-content" class="page-section cta">
     <div class="container">
         <div class="row">
 
             <div class="col-xl-9 mx-auto">
 
                 <div class="cta-inner bg-faded text-center rounded">
-                    <a th:href = "@{/professeur-list}" class="previous">&laquo; La list de professeurs</a>
+                    <a th:href="@{/matiere-list}">Retour à la liste des professeurs</a>
 
                     <div class="container">
                         <div class="row mt-5">
@@ -47,62 +68,62 @@
                                     <div class="alert alert-success">Vous avez été déconnecté(e) !!!</div>
                                 </div>
 
-                                    <form method="post" role="form" th:action="@{/professeur-form}" th:object="${professeur}">
+                                <form method="post" role="form" th:action="@{/professeur-form}" th:object="${professeur}">
 
 
-                                        <div class="row align-items-center mb-3">
-                                            <label class="col-sm-6 col-form-label" for="name">Nom</label>
-                                            <div class="col-sm-4">
-                                                <input class="form-control"  th:field="*{name}" id="name" name="name" type="Entrez votre name ">
-                                            </div>
+                                    <div class="row align-items-center mb-3">
+                                        <label class="col-sm-6 col-form-label" for="name">Nom</label>
+                                        <div class="col-sm-4">
+                                            <input class="form-control"  th:field="*{name}" id="name" name="name" type="Entrez votre name ">
                                         </div>
-                                        <div class="row align-items-center mb-3">
-                                            <label class="col-sm-6 col-form-label" for="prenom">Prénom</label>
-                                            <div class="col-sm-4">
-                                                <input class="form-control"  th:field="*{prenom}" id="prenom" name="prenom" type="Entrez votre prenom ">
-                                            </div>
+                                    </div>
+                                    <div class="row align-items-center mb-3">
+                                        <label class="col-sm-6 col-form-label" for="prenom">Prénom</label>
+                                        <div class="col-sm-4">
+                                            <input class="form-control"  th:field="*{prenom}" id="prenom" name="prenom" type="Entrez votre prenom ">
                                         </div>
+                                    </div>
 
-                                        <div class="row align-items-center mb-3">
-                                            <label class="col-sm-6 col-form-label" for="specialite">Spécialite</label>
-                                            <div class="col-sm-4">
-                                                <input class="form-control"  th:field="*{specialite}" id="specialite" name="specialite" type="Entrez votre specialite ">
-                                            </div>
+                                    <div class="row align-items-center mb-3">
+                                        <label class="col-sm-6 col-form-label" for="specialite">Spécialite</label>
+                                        <div class="col-sm-4">
+                                            <input class="form-control"  th:field="*{specialite}" id="specialite" name="specialite" type="Entrez votre specialite ">
                                         </div>
+                                    </div>
 
-                                        <div class="row align-items-center mb-3">
-                                            <label class="col-sm-6 col-form-label" for="diplome">Diplome</label>
-                                            <div class="col-sm-4">
-                                                <input class="form-control"  th:field="*{diplome}" id="diplome" name="diplome" type="Entrez votre diplome ">
-                                            </div>
+                                    <div class="row align-items-center mb-3">
+                                        <label class="col-sm-6 col-form-label" for="diplome">Diplome</label>
+                                        <div class="col-sm-4">
+                                            <input class="form-control"  th:field="*{diplome}" id="diplome" name="diplome" type="Entrez votre diplome ">
                                         </div>
+                                    </div>
 
-                                        <div class="row align-items-center mb-3">
-                                            <label class="col-sm-6 col-form-label" for="username">Username</label>
-                                            <div class="col-sm-4">
+                                    <div class="row align-items-center mb-3">
+                                        <label class="col-sm-6 col-form-label" for="username">Username</label>
+                                        <div class="col-sm-4">
                                             <input class="form-control" id="username" name="username" type="Entrez votre username">
-                                            </div>
                                         </div>
-                                        <div class="row align-items-center mb-3">
-                                            <label class="col-sm-6 col-form-label" for="email">E-mail</label>
-                                            <div class="col-sm-4">
+                                    </div>
+                                    <div class="row align-items-center mb-3">
+                                        <label class="col-sm-6 col-form-label" for="email">E-mail</label>
+                                        <div class="col-sm-4">
                                             <input class="form-control" id="email" name="email" type="email">
-                                            </div>
                                         </div>
-                                        <div class="row align-items-center mb-3">
-                                            <label class="col-sm-6 col-form-label" for="password">Mot de passe</label>
-                                            <div class="col-sm-4">
-                                                <input class="form-control" id="password" name="password" type="password">
-                                            </div>
+                                    </div>
+                                    <div class="row align-items-center mb-3">
+                                        <label class="col-sm-6 col-form-label" for="password">Mot de passe</label>
+                                        <div class="col-sm-4">
+                                            <input class="form-control" id="password" name="password" type="password">
                                         </div>
+                                    </div>
 
-                                        <div class="mb-3">
-                                            <button class="btn btn-primary mb-3" type="submit">Ajouter</button>
-                                            <span class="d-inline-block ml-2">or</span>
-                                            <a class="link-primary d-inline-block ml-2" th:href="@{/login}">Connecter</a>
-                                        </div>
+                                    <div class="mb-3">
+                                        <button class="btn btn-primary mb-3" type="submit">Ajouter</button>
+                                        <span class="d-inline-block ml-2">or</span>
+                                        <a class="link-primary d-inline-block ml-2" th:href="@{/login}">Connecter</a>
+                                    </div>
 
-                                    </form>
+                                </form>
 
                             </div>
                         </div>
@@ -117,12 +138,13 @@
             </div>
         </div>
     </div>
-</section>
+</div>
 
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
-<script th:src="@{/assets/js/scripts.js}" ></script>
+<script th:src="@{/assets/js/scripts.js}"></script>
+
+
 </body>
 </html>
-

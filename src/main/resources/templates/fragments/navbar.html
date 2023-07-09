@@ -14,18 +14,28 @@
     <!-- Sidebar -->
     <nav id="sidebarMenu" class="home-nav" th:fragment="navbar">
         <div class="position-sticky">
+            <div class="d-flex justify-content-center">
+                <!-- Navbar brand -->
+                <a class="navbar-brand mt-2 mt-lg-0" href="#">
+                    <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" th:src="@{../assets/img/ecole.png}" alt="..." style="width: 70px; height: 60px;" />
+                </a>
+            </div>
+        </div>
 
-                <!-- Collapsed content -->
+        <!-- Collapsed content -->
                 <ul id="collapseExample1" class="collapse show list-group list-group-flush">
                     <li class="list-group-item py-1">
                         <a th:href="@{/home}">Home</a>
                     </li>
-                    <li class="list-group-item py-1">
+                    <li class="list-group-item py-1" sec:authorize="hasRole('ROLE_ADMIN')">
                         <a th:href="@{/}" class="text-reset">index</a>
+                    </li>
 
+                    <li class="list-group-item py-1">
+                        <a th:href="@{/professeur-list}"  class="text-reset">Professeurs</a>
                     </li>
                     <li class="list-group-item py-1">
-                        <a href="" class="text-reset">Professeurs</a>
+                        <a th:href="@{/matiere-list}"  class="text-reset">Matieres</a>
                     </li>
                     <li class="list-group-item py-1">
                         <a href="" class="text-reset">Etudiants</a>

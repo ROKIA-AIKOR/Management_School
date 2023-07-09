@@ -8,6 +8,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.firewall.HttpFirewall;
+import org.springframework.security.web.firewall.StrictHttpFirewall;
 
 // ...
 
@@ -32,6 +34,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+    @Bean
+    public HttpFirewall httpFirewall() {
+        StrictHttpFirewall firewall = new StrictHttpFirewall();
+        firewall.setAllowUrlEncodedDoubleSlash(true);
+        return firewall;
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -47,14 +55,23 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/images/**",
                         "/img/**").permitAll()
                 .antMatchers("/**").permitAll()
+                .antMatchers("/home/**").permitAll()
 
                 //professeur
+
                 .antMatchers("/professeur-form/**").permitAll()
                 .antMatchers("/professeur-list/**").permitAll()
                 .antMatchers("/professeurs/**").permitAll()
                 .antMatchers("/detail-professeurs/**").permitAll()
                 .antMatchers("/professeurs/edit/**").permitAll()
                 .antMatchers("/pagination-professeurs/**").permitAll()
+
+                //Matiere
+                .antMatchers("/matiere-form/**").permitAll()
+                .antMatchers("/matiere-list/**").permitAll()
+                .antMatchers("/matiere/**").permitAll()
+                .antMatchers("/matiere-delete/**").permitAll()
+                .antMatchers("/matieres/edit/**").permitAll()
 
 
 

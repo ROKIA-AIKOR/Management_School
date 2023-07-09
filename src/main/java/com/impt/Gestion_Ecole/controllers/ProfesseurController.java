@@ -22,14 +22,12 @@ public class ProfesseurController {
     private UserService userService;
     private PasswordEncoder passwordEncoder;
 
+
     public ProfesseurController(ProfesseurService professeurService, UserService userService, PasswordEncoder passwordEncoder) {
         this.professeurService = professeurService;
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
     }
-
-
-
 
     /*******************************
      *
@@ -43,9 +41,6 @@ public class ProfesseurController {
         model.addAttribute("professeurs", professeurs);
         return "professeur/professeur-list";
     }
-
-
-
 
     /*******************************
      *
@@ -84,7 +79,8 @@ public class ProfesseurController {
     public String showAddProfesseurForm(Model model) {
         Professeur professeur = new Professeur();
         model.addAttribute("professeur", professeur);
-        return "/professeur/professeur-form";
+       return "/professeur/professeur-form";
+
     }
 
     @PostMapping("/professeur-form")
@@ -96,13 +92,10 @@ public class ProfesseurController {
         User user = new User(username, email, passwordEncoder.encode(password),
                 new ArrayList<>(Arrays.asList(new Role("ROLE_PROFESSEUR"))));
         professeurService.createProfesseur(professeur, user);
-        //return "redirect:/professeur-form?success";
         return "redirect:/professeur-list";
 
+
     }
-
-
-
 
     /*******************************
      *
