@@ -1,7 +1,7 @@
 package com.impt.Gestion_Ecole.controllers;
 
 import com.impt.Gestion_Ecole.model.Professeur;
-import com.impt.Gestion_Ecole.model.ProfesseurDTO;
+import com.impt.Gestion_Ecole.dto.ProfesseurDTO;
 import com.impt.Gestion_Ecole.model.Role;
 import com.impt.Gestion_Ecole.model.User;
 import com.impt.Gestion_Ecole.services.services.ProfesseurService;

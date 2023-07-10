@@ -51,7 +51,6 @@
 
                 </ul>
 
-
                 <a th:href="@{/logout}" class="btn btn-primary btn-xl" >
                     Déconnexion
                 </a>
@@ -64,50 +63,55 @@
 <section class="page-section cta">
 
     <div >
-        <h1>Liste des professeurs</h1>
+        <h1>Liste des notes</h1>
         <div class="row">
 
             <div class="col-xl-12 mx-auto">
 
                 <div class="cta-inner bg-faded text-center rounded">
                     <div class="d-flex justify-content-end">
-                        <a th:href="@{/professeur-form}" class="btn btn-primary"><i class="fa-solid fa-user-plus"> </i>  Ajouter</a>
+                        <a th:href="@{/note-form}" class="btn btn-primary"><i class="fa-solid fa-user-plus"> </i>  Ajouter</a>
                     </div>
 
 
                     <table class="table table-stripped table-bordered">
                         <thead class="table-dark">
                         <tr>
-                            <th>Nom</th>
-                            <th>Prenom</th>
-                            <th>Diplome</th>
-                            <th>Specialite</th>
-                            <th>E-mail</th>
-                            <th>Nom d'utilisateur</th>
-                            <th>Actions</th>
+                            <th>Nom de l'etudiant</th>
+                            <th>Matiere</th>
+                            <th>Niveau de l'etudiant</th>
+                            <th>Note 1</th>
+                            <th>Note 2</th>
+                            <th>Note 3</th>
+                            <th>Note Finale</th>
+                            <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="professeur : ${professeurs}">
+                        <tr th:each="note : ${notes}">
                             <td>
-                                <a th:href="@{/detail-professeurs/{id}(id=${professeur.prof_id})}">
-                                    <span th:text="${professeur.name}"></span>
+                                <a th:href="@{/detail-notes/{id}(id=${note.id})}">
+                                    <span th:text="${note.etudiant.name}"></span>
                                 </a>
                             </td>
-                            <td th:text="${professeur.prenom}"></td>
-                            <td th:text="${professeur.diplome}"></td>
-                            <td th:text="${professeur.specialite}"></td>
-                            <td th:text="${professeur.user.email}"></td>
-                            <td th:text="${professeur.user.username}"></td>
+                            <td th:text="${note.matiere.nom}"></td>
+                            <td th:text="${note.etudiant.niveau}"></td>
+                            <td th:text="${note.note1}"></td>
+                            <td th:text="${note.note2}"></td>
+                            <td th:text="${note.note3}"></td>
+                            <td th:text="${note.noteFinale}"></td>
                             <td>
-                                <a th:href="@{/professeurs/edit/{id}(id=${professeur.prof_id})}" class="btn btn-info">
+                                <a th:href="@{/notes/edit/{id}(id=${note.id})}" class="btn btn-info">
                                     <i class="fa fa-edit"></i>
                                 </a>
-                                <button class="btn btn-danger" data-mdb-toggle="modal" th:data-mdb-target="'#exampleModal' + ${professeur.prof_id}">
+
+                                <button class="btn btn-danger" data-mdb-toggle="modal" th:data-mdb-target="'#exampleModal' + ${note.id}">
                                     <i class="fa fa-trash"></i>
                                 </button>
+
                                 <!-- Modal -->
-                                <div class="modal fade" th:id="'exampleModal' + ${professeur.prof_id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal fade" th:id="'exampleModal' + ${note.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -115,15 +119,17 @@
                                                 <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                Êtes-vous sûr de vouloir supprimer le professeur <span th:text="${professeur.prof_id}"></span> ?
+                                                Êtes-vous sûr de vouloir supprimer la note <span th:text="${note.id}"></span> ?
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Annuler</button>
-                                                <a th:href="@{/professeurs/{id}(id=${professeur.prof_id})}" class="btn btn-danger">Supprimer</a>
+                                                <a th:href="@{/delete-notes/{id}(id=${note.id})}" class="btn btn-danger">Supprimer</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
+
                             </td>
                         </tr>
                         </tbody>
@@ -139,7 +145,7 @@
 
 
 <footer class="footer text-faded text-center py-5">
-    <div class="container"><p class="m-0 small">Copyright &copy; Projet de gestion d'ecole</p></div>
+    <div class="container"><p class="m-0 small">Projet de gestion d'ecole</p></div>
 </footer>
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>

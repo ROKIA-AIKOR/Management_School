@@ -66,7 +66,7 @@
             <div class="col-xl-9 mx-auto">
 
                 <div class="cta-inner bg-faded text-center rounded">
-                    <a th:href="@{/matiere-list}">Retour à la liste des professeurs</a>
+                    <a th:href="@{/note-list}">Retour à la liste des notes</a>
 
                     <div class="container">
                         <div class="row mt-5">
@@ -79,63 +79,91 @@
                                 <div th:if="${param.logout}">
                                     <div class="alert alert-success">Vous avez été déconnecté(e) !!!</div>
                                 </div>
-
-                                <form method="post" role="form" th:action="@{/professeur-form}" th:object="${professeur}">
-
-
+                                <form method="post" th:action="@{/note-form}" th:object="${note}">
                                     <div class="row align-items-center mb-3">
-                                        <label class="col-sm-6 col-form-label" for="name">Nom</label>
+                                        <label class="col-sm-6 col-form-label" for="note1">Note 1</label>
                                         <div class="col-sm-4">
-                                            <input class="form-control"  th:field="*{name}" id="name" name="name" type="Entrez votre name ">
+                                            <input class="form-control" id="note1" name="note1" type="number" onchange="calculateNoteFinale()">
                                         </div>
                                     </div>
                                     <div class="row align-items-center mb-3">
-                                        <label class="col-sm-6 col-form-label" for="prenom">Prénom</label>
+                                        <label class="col-sm-6 col-form-label" for="note2">Note 2</label>
                                         <div class="col-sm-4">
-                                            <input class="form-control"  th:field="*{prenom}" id="prenom" name="prenom" type="Entrez votre prenom ">
+                                            <input class="form-control" id="note2" name="note2" type="number" onchange="calculateNoteFinale()">
                                         </div>
                                     </div>
-
                                     <div class="row align-items-center mb-3">
-                                        <label class="col-sm-6 col-form-label" for="specialite">Spécialite</label>
+                                        <label class="col-sm-6 col-form-label" for="note3">Note 3</label>
                                         <div class="col-sm-4">
-                                            <input class="form-control"  th:field="*{specialite}" id="specialite" name="specialite" type="Entrez votre specialite ">
+                                            <input class="form-control" id="note3" name="note3" type="number" onchange="calculateNoteFinale()">
                                         </div>
                                     </div>
-
                                     <div class="row align-items-center mb-3">
-                                        <label class="col-sm-6 col-form-label" for="diplome">Diplome</label>
+                                        <label class="col-sm-6 col-form-label" for="noteFinale">Note Finale</label>
                                         <div class="col-sm-4">
-                                            <input class="form-control"  th:field="*{diplome}" id="diplome" name="diplome" type="Entrez votre diplome ">
+                                            <input class="form-control" id="noteFinale" name="noteFinale" type="text" readonly>
                                         </div>
                                     </div>
 
+                                    <script>
+                                        function calculateNoteFinale() {
+                                            var note1 = parseFloat(document.getElementById("note1").value);
+                                            var note2 = parseFloat(document.getElementById("note2").value);
+                                            var note3 = parseFloat(document.getElementById("note3").value);
+
+                                            var sum = note1 + note2 + note3;
+                                            var average = sum / 3;
+
+                                            document.getElementById("noteFinale").value = average.toFixed(2);
+                                        }
+                                    </script>
+
+
+
                                     <div class="row align-items-center mb-3">
-                                        <label class="col-sm-6 col-form-label" for="username">Username</label>
+                                        <label class="col-sm-6 col-form-label" for="niveau">Niveau</label>
                                         <div class="col-sm-4">
-                                            <input class="form-control" id="username" name="username" type="Entrez votre username">
+                                            <select class="form-control" th:field="*{etudiant.niveau}" id="niveau" name="niveau">
+                                                <option value="">Sélectionner un niveau</option>
+                                                <option th:each="etudiant : ${etudiants}" th:value="${etudiant.niveau}" th:text="${etudiant.niveau}"></option>
+                                            </select>
                                         </div>
                                     </div>
+
+
                                     <div class="row align-items-center mb-3">
-                                        <label class="col-sm-6 col-form-label" for="email">E-mail</label>
+                                        <label class="col-sm-6 col-form-label" for="etudiant2">Etudiant</label>
                                         <div class="col-sm-4">
-                                            <input class="form-control" id="email" name="email" type="email">
+                                            <select class="form-control" th:field="*{etudiant}" id="etudiant2" name="etudiant">
+                                                <option value="">Sélectionner un étudiant</option>
+                                                <option th:each="etudiant : ${etudiants}" th:value="${etudiant.etudiant_id}" th:text="${etudiant.name}"></option>
+                                            </select>
                                         </div>
                                     </div>
+
                                     <div class="row align-items-center mb-3">
-                                        <label class="col-sm-6 col-form-label" for="password">Mot de passe</label>
+                                        <label class="col-sm-6 col-form-label" for="matiere">Matiere</label>
                                         <div class="col-sm-4">
-                                            <input class="form-control" id="password" name="password" type="password">
+                                            <select class="form-control" th:field="*{matiere}" id="matiere" name="matiere">
+                                                <option value="">Sélectionner un matiere</option>
+                                                <option th:each="matiere : ${matieres}" th:value="${matiere.matiereId}" th:text="${matiere.nom}"></option>
+                                            </select>
                                         </div>
                                     </div>
+
+
 
                                     <div class="mb-3">
                                         <button class="btn btn-primary mb-3" type="submit">Ajouter</button>
                                         <span class="d-inline-block ml-2">or</span>
-                                        <a class="link-primary d-inline-block ml-2" th:href="@{/login}">Connecter</a>
+                                        <a class="link-primary d-inline-block ml-2" th:href="@{/note-list}">Retour</a>
                                     </div>
-
                                 </form>
+
+
+
+
+
 
                             </div>
                         </div>
@@ -159,5 +187,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
 <script th:src="@{/assets/js/scripts.js}" ></script>
+
+
 </body>
 </html>

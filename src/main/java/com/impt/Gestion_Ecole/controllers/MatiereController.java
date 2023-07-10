@@ -98,46 +98,7 @@ public class MatiereController {
      * Modifier matière
      *
      *******************************/
-/*
-    @GetMapping("/matieres/edit/{id}")
-    public String showUpdateMatiereForm(@PathVariable("id") Long id, Model model) {
-        Matiere matiere = matiereService.getMatiereById(id);
-        List<Professeur> professeurs = professeurService.getAllProfesseurs();
-        model.addAttribute("matiere", matiere);
-        model.addAttribute("professeurs", professeurs);
-        return "/matiere/matiere-modification";
-    }
 
-    @PostMapping("/matieres/edit/{id}")
-    public String updateMatiere(@PathVariable("id") Long id, @ModelAttribute("matiere") Matiere matiere,
-                                @RequestParam("professeurId") Long professeurId) {
-        // Récupérer la matière existante
-        Matiere existingMatiere = matiereService.getMatiereById(id);
-        if (existingMatiere == null) {
-            return "redirect:/matiere-list";
-        }
-
-        // Mettre à jour les propriétés de la matière si les valeurs ne sont pas nulles
-        if (matiere.getNom() != null) {
-            existingMatiere.setNom(matiere.getNom());
-        }
-        if (matiere.getDescription() != null) {
-            existingMatiere.setDescription(matiere.getDescription());
-        }
-
-        // Récupérer le professeur sélectionné s'il existe
-        Professeur professeur = professeurService.getProfesseurById(professeurId);
-        if (professeur != null) {
-            existingMatiere.setProfesseur(professeur);
-        }
-
-        // Enregistrer les modifications dans la base de données
-        matiereService.updateMatiere(existingMatiere);
-
-        return "redirect:/matiere-list";
-    }
-
- */
     @GetMapping("/matieres/edit/{id}")
     public String showUpdateMatiereForm(@PathVariable("id") Long id, Model model) {
         Matiere matiere = matiereService.getMatiereById(id);

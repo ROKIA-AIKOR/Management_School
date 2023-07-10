@@ -33,6 +33,8 @@ public class Professeur {
     @JsonIgnore
     private User user;
 
+    @OneToMany(mappedBy = "professeur", cascade = CascadeType.ALL)
+    private List<Note> notes;
 
     @OneToMany(mappedBy = "professeur", cascade = CascadeType.ALL)
 

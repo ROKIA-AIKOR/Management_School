@@ -29,36 +29,6 @@ public class LoginController {
         return "login";
     }
 
-    //Ajouter Etudiante
-    @GetMapping("/registration_etudiante")
-    public String registrationFormEtudiante(Model model) {
-        User etudiante = new User();
-        model.addAttribute("etudiante", etudiante);
-       return "registration_etudiante";
-      // return "redirect:/";
-    }
-
-    @PostMapping("/registration_etudiante")
-    public String registrationEtudiante(
-            @Valid @ModelAttribute("etudiante") User etudiantes,
-            BindingResult result,
-            Model model) {
-        User existingUser = userService.findUserByEmail(etudiantes.getEmail());
-
-        if (existingUser != null)
-            result.rejectValue("email", null,
-                    "Utilisateur déjà enregistré!!!");
-
-        if (result.hasErrors()) {
-            model.addAttribute("etudiante", etudiantes);
-            return "/registration_etudiante";
-        }
-
-        userService.saveEtudiante(etudiantes);
-        return "redirect:/registration_etudiante?success";
-
-    }
-
 
     //Ajouter  Admin
     @GetMapping("/registration_admin")

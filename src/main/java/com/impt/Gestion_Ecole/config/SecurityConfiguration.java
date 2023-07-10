@@ -74,13 +74,25 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/matieres/edit/**").permitAll()
 
 
+                //Etudiantes
+                .antMatchers("/etudiant-list/**").permitAll()
+                .antMatchers("/detail-etudiants/**").permitAll()
+                .antMatchers("/etudiant-form/**").permitAll()
+                .antMatchers("/etudiants/edit/**").permitAll()
+                .antMatchers("/etudiants/delete/**").permitAll()
+
+                //Note
+                .antMatchers("/note-list/**").permitAll()
+                .antMatchers("/detail-notes/**").permitAll()
+                .antMatchers("/note-form/**").permitAll()
+                .antMatchers("/notes/edit/**").permitAll()
+                .antMatchers("/delete-notes/**").permitAll()
 
 
 
                 .antMatchers("/index/**").permitAll()
                 .antMatchers("/home/**").permitAll()
                 .antMatchers("/registration_admin/**").permitAll()
-                .antMatchers("/registration_etudiante/**").permitAll()
                 .antMatchers("/login/**").permitAll()
                 .antMatchers("/user/**").hasAnyRole("USER", "ADMIN")
 

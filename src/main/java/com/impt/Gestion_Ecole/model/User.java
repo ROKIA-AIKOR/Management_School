@@ -45,6 +45,9 @@ public class User {
     @JsonIgnore
     private Professeur professeur;
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Etudiant etudiant;
 
     public User(String username, String email, String password, List<Role> roles) {
         this.username = username;

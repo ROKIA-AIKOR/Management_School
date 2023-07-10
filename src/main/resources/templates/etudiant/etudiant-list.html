@@ -27,7 +27,7 @@
 <body>
 <header>
     <h1 class="site-heading text-center text-faded d-none d-lg-block">
-        <span class="site-heading-upper text-primary mb-3">Gestion d'ecole</span>
+        <span class="site-heading-upper text-primary mb-3">Gestion d'école</span>
         <span class="site-heading-lower">Apprendre, grandir, réussir ensemble</span>
     </h1>
 </header>
@@ -40,11 +40,11 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" th:href="@{/}">Accueil</a></li>
-                    <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" th:href="@{/professeur-list}" >Professeur</a></li>
+                    <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" th:href="@{/professeur-list}">Professeur</a></li>
                     <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" th:href="@{/matiere-list}">Matiere</a></li>
-                    <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" th:href="@{/etudiant-list}" >Etudiant</a></li>
+                    <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" th:href="@{/etudiant-list}">Etudiant</a></li>
                     <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" th:href="@{/note-list}" >Note</a></li>
-                </ul>
+               </ul>
                 <ul>
                     <li><p sec:authentication="principal.username" style="color: white;"></p></li>
                     <li><p sec:authentication="principal.authorities" style="color: white;"></p></li>
@@ -59,55 +59,48 @@
         </div>
     </nav>
 </section>
-
-
 <section class="page-section cta">
-
-    <div >
-        <h1>Liste des professeurs</h1>
+    <div>
+        <h1>Liste des étudiants</h1>
         <div class="row">
-
             <div class="col-xl-12 mx-auto">
-
                 <div class="cta-inner bg-faded text-center rounded">
                     <div class="d-flex justify-content-end">
-                        <a th:href="@{/professeur-form}" class="btn btn-primary"><i class="fa-solid fa-user-plus"> </i>  Ajouter</a>
+                        <a th:href="@{/etudiant-form}" class="btn btn-primary"><i class="fa-solid fa-user-plus"></i> Ajouter</a>
                     </div>
-
-
                     <table class="table table-stripped table-bordered">
                         <thead class="table-dark">
                         <tr>
                             <th>Nom</th>
-                            <th>Prenom</th>
-                            <th>Diplome</th>
-                            <th>Specialite</th>
-                            <th>E-mail</th>
+                            <th>Prénom</th>
+                            <th>Niveau</th>
+                            <th>Spécialité</th>
+                            <th>Email</th>
                             <th>Nom d'utilisateur</th>
                             <th>Actions</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="professeur : ${professeurs}">
+                        <tr th:each="etudiant : ${etudiants}">
                             <td>
-                                <a th:href="@{/detail-professeurs/{id}(id=${professeur.prof_id})}">
-                                    <span th:text="${professeur.name}"></span>
+                                <a th:href="@{/detail-etudiants/{id}(id=${etudiant.etudiant_id})}">
+                                    <span th:text="${etudiant.name}"></span>
                                 </a>
                             </td>
-                            <td th:text="${professeur.prenom}"></td>
-                            <td th:text="${professeur.diplome}"></td>
-                            <td th:text="${professeur.specialite}"></td>
-                            <td th:text="${professeur.user.email}"></td>
-                            <td th:text="${professeur.user.username}"></td>
+                            <td th:text="${etudiant.prenom}"></td>
+                            <td th:text="${etudiant.niveau}"></td>
+                            <td th:text="${etudiant.specialite}"></td>
+                            <td th:text="${etudiant.user.email}"></td>
+                            <td th:text="${etudiant.user.username}"></td>
                             <td>
-                                <a th:href="@{/professeurs/edit/{id}(id=${professeur.prof_id})}" class="btn btn-info">
+                                <a th:href="@{/etudiants/edit/{id}(id=${etudiant.etudiant_id})}" class="btn btn-info">
                                     <i class="fa fa-edit"></i>
                                 </a>
-                                <button class="btn btn-danger" data-mdb-toggle="modal" th:data-mdb-target="'#exampleModal' + ${professeur.prof_id}">
+                                <button class="btn btn-danger" data-mdb-toggle="modal" th:data-mdb-target="'#exampleModal' + ${etudiant.etudiant_id}">
                                     <i class="fa fa-trash"></i>
                                 </button>
                                 <!-- Modal -->
-                                <div class="modal fade" th:id="'exampleModal' + ${professeur.prof_id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal fade" th:id="'exampleModal' + ${etudiant.etudiant_id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -115,11 +108,11 @@
                                                 <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                Êtes-vous sûr de vouloir supprimer le professeur <span th:text="${professeur.prof_id}"></span> ?
+                                                Êtes-vous sûr de vouloir supprimer l'étudiant <span th:text="${etudiant.etudiant_id}"></span> ?
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Annuler</button>
-                                                <a th:href="@{/professeurs/{id}(id=${professeur.prof_id})}" class="btn btn-danger">Supprimer</a>
+                                                <a th:href="@{/etudiants/{id}(id=${etudiant.etudiant_id})}" class="btn btn-danger">Supprimer</a>
                                             </div>
                                         </div>
                                     </div>
@@ -128,14 +121,12 @@
                         </tr>
                         </tbody>
                     </table>
-
-
-
                 </div>
             </div>
         </div>
     </div>
 </section>
+
 
 
 <footer class="footer text-faded text-center py-5">

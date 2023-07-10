@@ -27,6 +27,13 @@ public class Matiere {
     @JoinColumn(name = "prof_id")
     private Professeur professeur;
 
+    @ManyToOne
+    @JoinColumn(name = "etudiant_id")
+    private Etudiant etudiant;
+
+
+    @OneToMany(mappedBy = "matiere", cascade = CascadeType.ALL)
+    private List<Note> notes;
     @Override
     public String toString() {
         return "Matiere{" +

@@ -63,49 +63,60 @@
 
 <section class="page-section cta">
 
-    <div class="container">
-        <h1>Modification des matières</h1>
+    <div >
+        <h1>Détails de la note</h1>
         <div class="row">
-            <div class="col-xl-9 mx-auto">
+
+            <div class="col-xl-12 mx-auto">
+
                 <div class="cta-inner bg-faded text-center rounded">
-                    <a th:href="@{/matiere-list}">Retour à la liste des matières</a>
-                    <div class="col-12 mx-auto">
 
-                                <br>
-                                <div th:if="${param.error}">
-                                    <div class="alert alert-danger">Adresse e-mail ou mot de passe invalide !!!</div>
-                                </div>
-                                <div th:if="${param.logout}">
-                                    <div class="alert alert-success">Vous avez été déconnecté(e) !!!</div>
-                                </div>
-                                <h1>Détails de la matière</h1>
-                                <table>
-                                    <tr>
-                                        <th>Nom :</th>
-                                        <td th:text="${matiere.nom}"></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Description :</th>
-                                        <td th:text="${matiere.description}"></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Professeur :</th>
-                                        <td th:text="${matiere.professeur.name + ' ' + matiere.professeur.prenom}"></td>
-                                    </tr>
-                                </table>
+                    <table class="table table-stripped table-bordered">
+                        <tbody>
+                        <tr>
+                            <th>Nom de l'étudiant</th>
+                            <td>
+                                <a th:href="@{/detail-etudiants/{id}(id=${note.etudiant.etudiant_id})}">
+                                    <span th:text="${note.etudiant.name}"></span>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Matière</th>
+                            <td th:text="${note.matiere.nom}"></td>
+                        </tr>
+                        <tr>
+                            <th>Niveau de l'étudiant</th>
+                            <td th:text="${note.etudiant.niveau}"></td>
+                        </tr>
+                        <tr>
+                            <th>Note 1</th>
+                            <td th:text="${note.note1}"></td>
+                        </tr>
+                        <tr>
+                            <th>Note 2</th>
+                            <td th:text="${note.note2}"></td>
+                        </tr>
+                        <tr>
+                            <th>Note 3</th>
+                            <td th:text="${note.note3}"></td>
+                        </tr>
+                        <tr>
+                            <th>Note Finale</th>
+                            <td th:text="${note.noteFinale}"></td>
+                        </tr>
 
-
-
-    </div>
-
-
-
+                        </tbody>
+                    </table>
 
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+
+
 
 <footer class="footer text-faded text-center py-5">
     <div class="container"><p class="m-0 small">Copyright &copy; Projet de gestion d'ecole</p></div>

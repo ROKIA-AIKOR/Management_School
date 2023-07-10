@@ -51,7 +51,6 @@
 
                 </ul>
 
-
                 <a th:href="@{/logout}" class="btn btn-primary btn-xl" >
                     Déconnexion
                 </a>
@@ -64,43 +63,34 @@
 <section class="page-section cta">
 
     <div class="container">
-        <h1>Modification des matières</h1>
+        <h1>Détails de l'étudiant</h1>
         <div class="row">
             <div class="col-xl-9 mx-auto">
                 <div class="cta-inner bg-faded text-center rounded">
-                    <a th:href="@{/matiere-list}">Retour à la liste des matières</a>
+                    <a th:href="@{/etudiant-list}">Retour à la liste des étudiants</a>
+
+
                     <div class="col-12 mx-auto">
 
-                                <br>
-                                <div th:if="${param.error}">
-                                    <div class="alert alert-danger">Adresse e-mail ou mot de passe invalide !!!</div>
-                                </div>
-                                <div th:if="${param.logout}">
-                                    <div class="alert alert-success">Vous avez été déconnecté(e) !!!</div>
-                                </div>
-                                <h1>Détails de la matière</h1>
-                                <table>
-                                    <tr>
-                                        <th>Nom :</th>
-                                        <td th:text="${matiere.nom}"></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Description :</th>
-                                        <td th:text="${matiere.description}"></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Professeur :</th>
-                                        <td th:text="${matiere.professeur.name + ' ' + matiere.professeur.prenom}"></td>
-                                    </tr>
-                                </table>
+                        <br>
+                        <div th:if="${param.error}">
+                            <div class="alert alert-danger">Adresse e-mail ou mot de passe invalide !!!</div>
+                        </div>
+                        <div th:if="${param.logout}">
+                            <div class="alert alert-success">Vous avez été déconnecté(e) !!!</div>
+                        </div>
+
+                        <p>Nom: <span th:text="${etudiant.name}"></span></p>
+                        <p>Prénom: <span th:text="${etudiant.prenom}"></span></p>
+                        <p>Adresse: <span th:text="${etudiant.adresse}"></span></p>
+                        <p>Date de naissance: <span th:text="${etudiant.date_naissance}"></span></p>
+                        <p>Niveau: <span th:text="${etudiant.niveau}"></span></p>
+                        <p>Spécialité: <span th:text="${etudiant.specialite}"></span></p>
+                        <p>E-mail: <span  th:text="${etudiant.user.email}"></span></p>
+                        <p>Nom d'utilisateur:  <span  th:text="${etudiant.user.username}"></span></p>
 
 
-
-    </div>
-
-
-
-
+                    </div>
                 </div>
             </div>
         </div>

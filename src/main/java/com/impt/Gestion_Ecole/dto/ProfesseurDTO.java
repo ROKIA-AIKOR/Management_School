@@ -1,5 +1,6 @@
-package com.impt.Gestion_Ecole.model;
+package com.impt.Gestion_Ecole.dto;
 
+import com.impt.Gestion_Ecole.model.User;
 import lombok.Data;
 
 
