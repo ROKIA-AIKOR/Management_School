@@ -71,7 +71,7 @@
 
                 <div class="cta-inner bg-faded text-center rounded">
                     <div class="d-flex justify-content-end">
-                        <a th:href="@{/professeur-form}" class="btn btn-primary"><i class="fa-solid fa-user-plus"> </i>  Ajouter</a>
+                        <a th:href="@{/professeur-form}" class="btn btn-primary"> Ajouter</a>
                     </div>
 
 
@@ -82,9 +82,9 @@
                             <th>Prenom</th>
                             <th>Diplome</th>
                             <th>Specialite</th>
-                            <th>E-mail</th>
-                            <th>Nom d'utilisateur</th>
-                            <th>Actions</th>
+                            <th>mail</th>
+
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -98,7 +98,7 @@
                             <td th:text="${professeur.diplome}"></td>
                             <td th:text="${professeur.specialite}"></td>
                             <td th:text="${professeur.user.email}"></td>
-                            <td th:text="${professeur.user.username}"></td>
+
                             <td>
                                 <a th:href="@{/professeurs/edit/{id}(id=${professeur.prof_id})}" class="btn btn-info">
                                     <i class="fa fa-edit"></i>

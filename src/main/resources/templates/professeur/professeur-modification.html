@@ -68,7 +68,7 @@
         <div class="row">
             <div class="col-xl-9 mx-auto">
                 <div class="cta-inner bg-faded text-center rounded">
-                    <a th:href="@{/matiere-list}">Retour à la liste des professeurs</a>
+                    <a th:href="@{/professeur-list}">Retour à la liste des professeurs</a>
 
                     <form method="post" role="form" th:action="@{/professeurs/edit/{id}(id=${professeur.prof_id})}" th:object="${professeur}">
                                     <div class="row align-items-center mb-3">
@@ -116,8 +116,7 @@
 
                                     <div class="mb-3">
                                         <button class="btn btn-primary mb-3" type="submit">Mettre à jour</button>
-                                        <span class="d-inline-block ml-2">ou</span>
-                                        <a class="link-primary d-inline-block ml-2" th:href="@{/login}">Se connecter</a>
+
                                     </div>
                                 </form>
 

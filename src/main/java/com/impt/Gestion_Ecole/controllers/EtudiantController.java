@@ -143,5 +143,6 @@ public class EtudiantController {
         etudiantService.deleteEtudiant(id);
         return "redirect:/etudiant-list";
     }
+
 }
 
